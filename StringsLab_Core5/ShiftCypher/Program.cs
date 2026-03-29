@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Joseph Teague, CS 162N w/ Lindy Stewart, 3/29/2026
+
+using System;
 
 namespace ShiftCypher
 {
