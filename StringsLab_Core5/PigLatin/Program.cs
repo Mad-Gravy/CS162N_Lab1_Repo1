@@ -132,6 +132,10 @@ public class Program
 
         string pigString = "";
 
+        // Check if word is capitalized and store in boolean, then make sure first character is lowercase for conversion
+        bool capitalized = char.IsUpper(s[0]);
+        s = s.ToLower();
+
         int i = IndexOfFirstVowel(s);
 
         if (IsVowel(s[0]) && s[0] != 'y')
@@ -145,6 +149,12 @@ public class Program
         else
         {
             pigString = string.Concat(s, "ay");
+        }
+
+        // Check if word needs to be properly capitalized again and convert if necessary.
+        if(capitalized)
+        {
+            pigString = (char.ToUpper(pigString[0]) + pigString[1..]);
         }
         return pigString + punc;
     }
