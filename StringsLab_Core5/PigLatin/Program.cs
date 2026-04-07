@@ -61,12 +61,14 @@ public class Program
         // Calling/Testing Objective of Lab 1, Ex 1.
         // Lab 1, Ex 2 Complete: Correct capitalization.
         // Lab 1, Ex 3 Completed previously via instructional video.
+        // Lab 1, Ex 4 Completed using the PigLatin2 method.
 
         string pig1 = PigLatin1(words[0]);
         Console.WriteLine($"The word {words[0]} in pig latin is: {pig1}");
 
-        string pig2 = PigLatin2(words[0]);
-        Console.WriteLine("The word {0} in pig latin is: {1}", words[0], pig2);
+        // Had to adjust this for full sentences, but it's working! <3
+        string pig2 = PigLatin2(input);
+        Console.WriteLine($"The sentence in pig latin is: " + pig2);
 
         char b = 'b';
         Console.WriteLine("Here's a character: " + b);
@@ -161,9 +163,17 @@ public class Program
         return pigString + punc;
     }
 
-    // I'll do this with you in a screen cast
+    // Adjusted this to be the method for full sentences. Splits english sentence into individual words to covert via PigLatin1 method, concatenates and trims the extra space off the end.
     static string PigLatin2(string s)
     {
-        return s;
+        string[] engSentence = s.Split();
+        string pigSentence = "";
+
+        foreach(string word in engSentence)
+        {
+            pigSentence += PigLatin1(word) + " ";
+        }
+
+        return pigSentence.Trim();
     }
 }
