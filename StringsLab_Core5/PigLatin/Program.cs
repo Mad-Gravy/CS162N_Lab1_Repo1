@@ -59,6 +59,8 @@ public class Program
             Console.WriteLine("String split into individual words: " + word);
 
         // Calling/Testing Objective of Lab 1, Ex 1.
+        // Lab 1, Ex 2 Complete: Correct capitalization.
+        // Lab 1, Ex 3 Completed previously via instructional video.
 
         string pig1 = PigLatin1(words[0]);
         Console.WriteLine($"The word {words[0]} in pig latin is: {pig1}");
