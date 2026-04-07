@@ -45,17 +45,13 @@ namespace ShiftCypher
                 {
                     output += letter;
                 }
-                else if (letter == 'z')
+                else if (char.IsLower(letter))
                 {
-                    output += (char)('a' + (shift - 1));
+                    output += (char)(((letter - 'a' + shift + 26) % 26) + 'a'); ; // stole this code from the internet to fix my blunder lol
                 }
-                else if (letter == 'Z')
+                else if (char.IsUpper(letter))
                 {
-                    output += (char)('A' + (shift - 1));
-                }
-                else
-                {
-                    output += (char)(letter + shift);
+                    output += (char)(((letter - 'A' + shift + 26) % 26) + 'A'); ;
                 }
             }
             return output;
