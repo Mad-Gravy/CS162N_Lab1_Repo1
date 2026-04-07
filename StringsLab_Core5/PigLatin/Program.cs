@@ -1,8 +1,10 @@
-﻿using System;
+﻿// Joseph Teague, CS162N w/ Lindy Stewart, 3/29/2026
+using System;
+using System.Security.Cryptography.X509Certificates;
 
 public class Program
 {
-    // changing of the notes: !! Joseph Teague, CS162N w/ Lindy Stewart, 3/29/2026 !!
+    // changing of the notes:
     /*  1.==============================================================================================
 		Design and implement a program that processes a string entered from the keyboard.  The application will
 		- convert the string to upper and lowercase
@@ -45,23 +47,21 @@ public class Program
 
         // find the index of the first vowel in a string
         // see the method IsVowel below
-        int vIndex = -1;
-        // a string has a Length property  - just like an array
-        for (int i = 0; i < input.Length && vIndex == -1; i++)
-        {
-            char c = input[i];
-            if (IsVowel(c))
-                vIndex = i;
-        }
+
+        /* deleted block after filling out IndexOfFirstVowel method. */
+
+        int vIndex = IndexOfFirstVowel(input);
         Console.WriteLine("The index of the first vowel is: " + vIndex);
 
         // create an array of strings from a string.  Default delimiter is white space.
         string[] words = input.Split();
         foreach (string word in words)
-            Console.WriteLine(word);
+            Console.WriteLine("String split into individual words: " + word);
+
+        // Calling/Testing Objective of Lab 1, Ex 1.
 
         string pig1 = PigLatin1(words[0]);
-        Console.WriteLine("The word {0} in pig latin is: {1}", words[0], pig1);
+        Console.WriteLine($"The word {words[0]} in pig latin is: {pig1}");
 
         string pig2 = PigLatin2(words[0]);
         Console.WriteLine("The word {0} in pig latin is: {1}", words[0], pig2);
@@ -84,20 +84,69 @@ public class Program
     // I'll do this with you in a screen cast
     static bool IsVowel(char c)
     {
+        string vowels = "aeiouAEIOU";
+        for(int i = 0;i < vowels.Length; i++)
+        {
+            if (vowels[i] == c)
+            {
+                return true;
+            }
+        }
         return false;
     }
 
     // I'll do this with you in a screen cast
     static int IndexOfFirstVowel(string s)
     {
-        int vIndex = -1;
-        return vIndex;
+        for(int i = 0; i < s.Length; i++)
+        {
+            if (IsVowel(s[i]))
+                return i;
+        }
+        return -1;
+    }
+
+    // Punctuation Method using built-in C# check
+    static bool IsPunctuation(char c)
+    {
+        return char.IsPunctuation(c);
     }
 
     // I'll do this in the screen cast
     static string PigLatin1(string s)
     {
-        return s;
+        string punc = "";
+        string temp = "";
+
+        foreach (char c in s)
+        {
+            if (IsPunctuation(c))
+                punc += c;
+            else
+                temp += c;
+        }
+        s = temp;
+
+        if (string.IsNullOrEmpty(s))
+            return punc;
+
+        string pigString = "";
+
+        int i = IndexOfFirstVowel(s);
+
+        if (IsVowel(s[0]) && s[0] != 'y')
+        {
+            pigString = string.Concat(s, "yay");
+        }
+        else if (i > 0)
+        {
+            pigString = s[i..] + s[..i] + "ay";
+        }
+        else
+        {
+            pigString = string.Concat(s, "ay");
+        }
+        return pigString + punc;
     }
 
     // I'll do this with you in a screen cast
